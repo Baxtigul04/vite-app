@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, Link } from "react-router-dom";
 import Header from "./components/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -53,18 +53,18 @@ const Home = () => {
           other developers
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="px-6 py-3 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700"
           >
             Sign Up
-          </a>
-          <a
-            href="/login"
+          </Link>
+          <Link
+            to="/login"
             className="px-6 py-3 bg-gray-700 text-white rounded-md font-medium hover:bg-gray-600"
           >
             Login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
