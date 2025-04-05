@@ -8,7 +8,7 @@ import PostDetails from "./pages/PostDetails";
 import Developers from "./pages/Developers";
 import DeveloperDetails from "./pages/DeveloperDetails";
 import NotFound from "./pages/NotFound";
-import CarDashboard from "./CarDashboard";
+import CarDashboard from "./pages/CarDashboard";
 
 function App() {
   return (
