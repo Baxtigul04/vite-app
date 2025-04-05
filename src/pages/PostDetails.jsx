@@ -18,7 +18,8 @@ const PostDetails = () => {
         })
         .then((res) => {
           setUserId(res.data._id);
-        });
+        })
+        .catch((err) => console.error("Error fetching user:", err));
     }
   }, [token]);
 
@@ -27,8 +28,9 @@ const PostDetails = () => {
       .get(`https://nt-devconnector.onrender.com/api/posts/${id}`, {
         headers: { "x-auth-token": token },
       })
-      .then((res) => setPost(res.data));
-  }, [id]);
+      .then((res) => setPost(res.data))
+      .catch((err) => console.error("Error fetching post:", err));
+  }, [id, token]);
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -43,7 +45,8 @@ const PostDetails = () => {
       .then((res) => {
         setPost({ ...post, comments: res.data });
         setComment("");
-      });
+      })
+      .catch((err) => console.error("Error adding comment:", err));
   };
 
   const handleDeleteComment = (commentId) => {
@@ -56,7 +59,8 @@ const PostDetails = () => {
       )
       .then((res) => {
         setPost({ ...post, comments: res.data });
-      });
+      })
+      .catch((err) => console.error("Error deleting comment:", err));
   };
 
   const handleLikePost = () => {
@@ -71,7 +75,8 @@ const PostDetails = () => {
           ...post,
           likes: [...post.likes, { user: userId }],
         });
-      });
+      })
+      .catch((err) => console.error("Error liking post:", err));
   };
 
   const handleUnlikePost = () => {
@@ -86,7 +91,8 @@ const PostDetails = () => {
           ...post,
           likes: post.likes.filter((like) => like.user !== userId),
         });
-      });
+      })
+      .catch((err) => console.error("Error unliking post:", err));
   };
 
   const handleDeletePost = () => {
@@ -96,7 +102,8 @@ const PostDetails = () => {
       })
       .then(() => {
         navigate("/posts");
-      });
+      })
+      .catch((err) => console.error("Error deleting post:", err));
   };
 
   const isPostLikedByUser = () => {
@@ -174,7 +181,6 @@ const PostDetails = () => {
                     <p className="text-gray-700 mb-2">{comment.text}</p>
                     <div className="flex justify-between items-center text-xs text-gray-500">
                       <span>{new Date(comment.date).toLocaleDateString()}</span>
-                      {/* Feature 1: Delete comment button (only for user's own comments) */}
                       {comment.user === userId && (
                         <button
                           onClick={() => handleDeleteComment(comment._id)}

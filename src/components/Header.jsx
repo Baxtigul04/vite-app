@@ -34,6 +34,12 @@ const Header = () => {
                 >
                   Posts
                 </Link>
+                <Link
+                  to="/cars"
+                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600"
+                >
+                  Mashinalar
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="ml-2 px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-600"

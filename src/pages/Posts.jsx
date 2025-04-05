@@ -16,7 +16,8 @@ const Posts = () => {
         })
         .then((res) => {
           setUserId(res.data._id);
-        });
+        })
+        .catch((err) => console.error("Error fetching user:", err));
     }
   }, [token]);
 
@@ -25,12 +26,13 @@ const Posts = () => {
       .get(`https://nt-devconnector.onrender.com/api/posts`, {
         headers: { "x-auth-token": token },
       })
-      .then((res) => setPosts(res.data));
-  }, []);
+      .then((res) => setPosts(res.data))
+      .catch((err) => console.error("Error fetching posts:", err));
+  }, [token]);
 
   const handleCreatePost = (e) => {
     e.preventDefault();
-    if (!newPostText.trim()) return;
+    if (newPostText === "") return;
 
     axios
       .post(
@@ -41,7 +43,8 @@ const Posts = () => {
       .then((res) => {
         setPosts([res.data, ...posts]);
         setNewPostText("");
-      });
+      })
+      .catch((err) => console.error("Error creating post:", err));
   };
 
   const handleLikePost = (postId) => {
@@ -59,7 +62,8 @@ const Posts = () => {
               : post
           )
         );
-      });
+      })
+      .catch((err) => console.error("Error liking post:", err));
   };
 
   const handleUnlikePost = (postId) => {
@@ -80,7 +84,8 @@ const Posts = () => {
               : post
           )
         );
-      });
+      })
+      .catch((err) => console.error("Error unliking post:", err));
   };
 
   const handleDeletePost = (postId) => {
@@ -90,7 +95,8 @@ const Posts = () => {
       })
       .then(() => {
         setPosts(posts.filter((post) => post._id !== postId));
-      });
+      })
+      .catch((err) => console.error("Error deleting post:", err));
   };
 
   const isPostLikedByUser = (post) => {
@@ -114,7 +120,7 @@ const Posts = () => {
             ></textarea>
             <button
               type="submit"
-              disabled={!newPostText.trim()}
+              disabled={newPostText === ""}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
             >
               Post

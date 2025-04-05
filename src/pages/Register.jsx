@@ -19,6 +19,10 @@ const Register = () => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         navigate("/posts");
+      })
+      .catch((err) => {
+        console.error("Registration error:", err);
+        alert("Registration failed. Please try again.");
       });
   }
 

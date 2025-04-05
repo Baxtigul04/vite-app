@@ -8,6 +8,7 @@ import PostDetails from "./pages/PostDetails";
 import Developers from "./pages/Developers";
 import DeveloperDetails from "./pages/DeveloperDetails";
 import NotFound from "./pages/NotFound";
+import CarDashboard from "./CarDashboard";
 
 function App() {
   return (
@@ -19,7 +20,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/developers" element={<Developers />} />
         <Route path="/profile/:id" element={<DeveloperDetails />} />
-
+        <Route
+          path="/cars"
+          element={
+            <ProtectedRoute>
+              <CarDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/posts"
           element={
